@@ -1,0 +1,32 @@
+{
+  "name": "mailpress",
+  "version": "0.0.1",
+  "description": "A wiring up of node-mailer to templates.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jakswa/node-mailpress.git"
+  },
+  "keywords": [
+    "node",
+    "mailer",
+    "templates",
+    "mustache"
+  ],
+  "author": "Jake Swanson <jakswa@gmail.com>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/jakswa/node-mailpress/issues"
+  },
+  "homepage": "https://github.com/jakswa/node-mailpress",
+  "dependencies": {
+    "node-mailer": "~0.1.1",
+    "node-config": "0.0.2",
+    "mustache": "~0.8.1",
+    "underscore": "~1.6.0",
+    "q": "~1.0.1"
+  }
+}
