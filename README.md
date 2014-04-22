@@ -48,12 +48,15 @@ var defaults = {
 };
 
 module.exports = new Mailpress(defaults);
-
+```
+and to use it:
+```javascript
 // in another file, and assuming you have html and text templates created
 var myMailer = require('./mailer');
 myMailer.sendMail({
   name: 'Jake Swanson', 
-  welcomeText: 'Hello Mr. Swanson'}, {
+  welcomeText: 'Hello Mr. Swanson'
+},{
   to: 'jakeswanson@fakemail.com',
   subject: 'Setting subject line for this email!'
 });
