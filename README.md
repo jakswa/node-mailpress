@@ -14,14 +14,12 @@ Expected structure:
 
 This can be overridden in either the application config or in the individual mailer's config, but I admit not much testing has been done with custom mailer options at this time.
 
-Requirements
-============
+## Requirements
 
  - [`node-config`](https://github.com/lorenwest/node-config): All our projects currently use this to configure our apps. Apologies if it doesn't fit in with your project. Easy enough to remove, if there's need.
  - [`mustache`](http://mustache.github.io/): Currently, this only supports mustache templates. 
 
-Usage:
-======
+## Usage:
 
 - `npm install --save mailpress`
 - add `mailer` config section to your `node-config`—an example for Amazon SES is below.
@@ -29,8 +27,7 @@ Usage:
 - create corresponding templates in the templateDir you have set (or in `../views/mail` relative to your mailer module, if you're going by the default assumptions)
 - require in your mailer and call `mailer.sendMail(templateLocals, [configs])` on it
 
-Config Example
-============
+## Config Example
 
 ```javascript
 mailer: {
@@ -46,8 +43,8 @@ mailer: {
 }
 ```
 
-Mailer Example
-============
+## Mailer Example
+
 ```javascript
 // mailer.js
 var Mailpress = require('mailpress');
