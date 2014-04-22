@@ -6,13 +6,13 @@ Wiring up of node-mailer to templates. By default, this package assumes you have
 Expected structure:
 - parent directory (whatever name)
  - mailer directory (whatever name)
-   - welcomeMail.js
+     - welcomeMail.js
  - views
-   - mail
-     - welcomeMail.html
-     - welcomeMail.txt
+     - mail
+         - welcomeMail.html
+         - welcomeMail.txt
 
-This can be overriden in either the application config or in the individual mailer's config, but I admit not much testing has been done with custom mailer options at this time.
+This can be overridden in either the application config or in the individual mailer's config, but I admit not much testing has been done with custom mailer options at this time.
 
 Requirements
 ============
