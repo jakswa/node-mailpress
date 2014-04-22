@@ -1,7 +1,7 @@
 node-mailpress
 ==============
 
-Wiring up of node-mailer to templates. By default, this package assumes you have a certain directory structure, but such assumptions can be overridden, since node projects vary widely on such things.
+Wiring up of [node-mailer](https://github.com/andris9/Nodemailer) to templates. By default, this package assumes you have a certain directory structure, but such assumptions can be overridden, since node projects vary widely on such things.
 
 Expected structure:
 - parent directory (whatever name)
