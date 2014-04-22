@@ -3,6 +3,17 @@ node-mailpress
 
 Wiring up of node-mailer to templates. By default, this package assumes you have a certain directory structure, but such assumptions can be overridden, since node projects vary widely on such things.
 
+Expected structure:
+- parent directory (whatever name)
+ - mailer directory (whatever name)
+   - welcomeMail.js
+ - views
+   - mail
+     - welcomeMail.html
+     - welcomeMail.txt
+
+This can be overriden in either the application config or in the individual mailer's config, but I admit not much testing has been done with custom mailer options at this time.
+
 Requirements
 ============
 
@@ -60,4 +71,10 @@ myMailer.sendMail({
   to: 'jakeswanson@fakemail.com',
   subject: 'Setting subject line for this email!'
 });
+```
+
+and corresponding example [mustache](http://mustache.github.io/) html template (by default it expects `.txt` and `.html` templates):
+```html
+<h1>{{welcomeText}}</h1>
+<p>Hey there {{name}}, this email is crafted for you.</p>
 ```
