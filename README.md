@@ -17,7 +17,8 @@ This can be overridden in either the application config or in the individual mai
 Requirements
 ============
 
- - `node-config`: All our projects currently use this to configure our apps. Apologies if it doesn't fit in with your project. Easy enough to remove, if there's need.
+ - [`node-config`](https://github.com/lorenwest/node-config): All our projects currently use this to configure our apps. Apologies if it doesn't fit in with your project. Easy enough to remove, if there's need.
+ - [`mustache`](http://mustache.github.io/): Currently, this only supports mustache templates. 
 
 Usage:
 ======
