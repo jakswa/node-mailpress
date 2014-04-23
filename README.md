@@ -36,7 +36,7 @@ mailer: {
 ## Mailer Example
 
 ```javascript
-// mailer.js
+// welcome.js
 var Mailpress = require('mailpress');
 
 var defaults = {
@@ -50,8 +50,8 @@ module.exports = new Mailpress(defaults);
 ```
 and to use it:
 ```javascript
-// welcome.js
-var myMailer = require('./mailer');
+// in some other module
+var myMailer = require('./welcome');
 myMailer.sendMail({
   name: 'Jake Swanson', 
   welcomeText: 'Hello Mr. Swanson'
