@@ -75,9 +75,6 @@ it in the mailer defaults. So, for `welcome.js`, you would name them `welcome.ht
 ```
 
 ```
-<!-- placed in 'templateDir' directory specified in the config
-  -- e.g. relative/to/root/welcome.html
-  -->
-<h1>{{welcomeText}}</h1>
-<p>Hey there {{name}}, this email is crafted for you.</p>
+{{welcomeText}}!
+Hey there {{name}}, this email is crafted for you.
 ```
