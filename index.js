@@ -7,6 +7,12 @@ var q = require('q');
 var fs = require('fs');
 var path = require('path');
 
+var nodeMailerOpts = [
+  'to', 'from', 'subject', 'replyTo', 'html', 'text', 'dsn',
+  'cc', 'bcc', 'inReplyTo', 'references', 'headers', 'attachments',
+  'alternatives', 'envelope', 'messageId', 'date', 'encoding', 'charset'
+];
+
 module.exports = function (opts) {
   "use strict";
 
@@ -61,7 +67,7 @@ module.exports = function (opts) {
         }
       });
 
-      mailOpts = _.pick(conf, 'to', 'from', 'subject', 'replyTo', 'html', 'text');
+      mailOpts = _.pick(conf, nodeMailerOpts);
       transport.sendMail(mailOpts, function(err) {
         if (err) {
           console.log('Mail error: ', err);
