@@ -20,7 +20,7 @@ Wiring up of [node-mailer](https://github.com/andris9/Nodemailer) to templates. 
 
 ```javascript
 mailer: {
-        templateDir: "relative/to/project/root',
+        templateDir: "relative/to/project/root",
         transport: "SMTP",
         transportOpts: {
             service: "SES",
