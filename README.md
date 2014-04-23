@@ -64,7 +64,7 @@ myMailer.sendMail({
 and here's a set of corresponding [mustache](http://mustache.github.io/) template examples:
 
 **NOTE**: The base name of template files must be same as the mailer base name, unless you override
-it in the mailer defaults. So, for `welcome.js`, you would name them `welcome.html` and `welcome.js`
+it in the mailer defaults. So, for `welcome.js`, you would name them `welcome.html` and `welcome.txt`
 ```html
 <!-- these two are placed in 'templateDir' directory specified in the config
   -- e.g. relative/to/root/welcome.html
