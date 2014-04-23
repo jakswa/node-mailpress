@@ -1,7 +1,7 @@
 node-mailpress
 ==============
 
-Wiring up of [node-mailer](https://github.com/andris9/Nodemailer) to templates. Plop in the module, insert configs, and some template files, and you're ready to churn out some emails!
+Wiring up of [node-mailer](https://github.com/andris9/Nodemailer) to templates. Plop in the module, insert configs, and some template files, and you're ready to churn out some emails! Comes packaged with default naming expectations for quickly making mailers. For example, a `welcome.js` mailer will have template files named `mailer.html` and `mailer.txt` in the `templateDir`. You can override such expectations when creating a mailer.
 
 ## Requirements
 
@@ -62,6 +62,9 @@ myMailer.sendMail({
 ```
 
 and here's a set of corresponding [mustache](http://mustache.github.io/) template examples:
+
+**NOTE**: The base name of template files must be same as the mailer base name, unless you override
+it in the mailer defaults. So, for `welcome.js`, you would name them `welcome.html` and `welcome.js`
 ```html
 <!-- these two are placed in 'templateDir' directory specified in the config
   -- e.g. relative/to/root/welcome.html
