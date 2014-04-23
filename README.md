@@ -1,18 +1,7 @@
 node-mailpress
 ==============
 
-Wiring up of [node-mailer](https://github.com/andris9/Nodemailer) to templates. By default, this package assumes you have a certain directory structure, but such assumptions can be overridden, since node projects vary widely on such things.
-
-Expected structure:
-- parent directory (whatever name)
- - mailer directory (whatever name)
-     - welcomeMail.js
- - views
-     - mail
-         - welcomeMail.html
-         - welcomeMail.txt
-
-This can be overridden in either the application config or in the individual mailer's config, but I admit not much testing has been done with custom mailer options at this time.
+Wiring up of [node-mailer](https://github.com/andris9/Nodemailer) to templates. Plop in the module, insert configs, and some template files, and you're ready to churn out some emails!
 
 ## Requirements
 
@@ -31,6 +20,7 @@ This can be overridden in either the application config or in the individual mai
 
 ```javascript
 mailer: {
+        templateDir: "relative/to/project/root',
         transport: "SMTP",
         transportOpts: {
             service: "SES",
@@ -60,7 +50,7 @@ module.exports = new Mailpress(defaults);
 ```
 and to use it:
 ```javascript
-// in another file, and assuming you have html and text templates created
+// welcome.js
 var myMailer = require('./mailer');
 myMailer.sendMail({
   name: 'Jake Swanson', 
@@ -71,8 +61,20 @@ myMailer.sendMail({
 });
 ```
 
-and corresponding example [mustache](http://mustache.github.io/) html template (by default it expects `.txt` and `.html` templates):
+and here's a set of corresponding [mustache](http://mustache.github.io/) template examples:
 ```html
+<!-- these two are placed in 'templateDir' directory specified in the config
+  -- e.g. relative/to/root/welcome.html
+     and  relative/to/root/welcome.txt
+  -->
+<h1>{{welcomeText}}</h1>
+<p>Hey there {{name}}, this email is crafted for you.</p>
+```
+
+```
+<!-- placed in 'templateDir' directory specified in the config
+  -- e.g. relative/to/root/welcome.html
+  -->
 <h1>{{welcomeText}}</h1>
 <p>Hey there {{name}}, this email is crafted for you.</p>
 ```
