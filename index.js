@@ -20,7 +20,7 @@ module.exports = function (opts) {
   var defaults = this.defaults = {
     // can be overridden in node-config, or mailer creation options
     templateDir: path.join('server', 'views', 'mail'),
-    fileBaseName: _.last(parentFile).split('.')[0],
+    templateBaseName: parentFile.split('.')[0],
     templateExtensions: {html: '.html', text: '.txt'},
     templates: {html: null, text: null}
   };
@@ -32,7 +32,7 @@ module.exports = function (opts) {
       return q.when(); // assume user provided their own template to render
     }
     var templatePromise = q.defer();
-    var fileName = defaults.fileBaseName + fileExt;
+    var fileName = defaults.templateBaseName + fileExt;
     var filePath = path.resolve(rootDir, defaults.templateDir, fileName);
     fs.readFile(filePath, function(err, data) {
       if (err) {
