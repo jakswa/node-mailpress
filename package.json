@@ -1,6 +1,6 @@
 {
   "name": "mailpress",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A wiring up of node-mailer to templates.",
   "main": "index.js",
   "scripts": {
