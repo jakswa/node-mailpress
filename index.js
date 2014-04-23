@@ -3,6 +3,7 @@ var config = require("config");
 var mustache = require("mustache");
 var _ = require('underscore');
 var q = require('q');
+
 var fs = require('fs');
 var path = require('path');
 
@@ -14,11 +15,11 @@ module.exports = function (opts) {
 
   // assuming by default you'll name your templates the same as the mailer,
   // just with different extensions (".html.blah.blah") (mustache only atm)
-  var parentFile = module.parent.filename.split(path.sep);
-  var parentDirectory = parentFile.slice(0,-2).join(path.sep);
+  var parentFile = path.basename(module.parent.filename);
+  var rootDir = path.dirname(require.main && require.main.filename);
   var defaults = this.defaults = {
     // can be overridden in node-config, or mailer creation options
-    templateDir: path.resolve(parentDirectory, 'views', 'mail'),
+    templateDir: path.join('server', 'views', 'mail'),
     fileBaseName: _.last(parentFile).split('.')[0],
     templateExtensions: {html: '.html', text: '.txt'},
     templates: {html: null, text: null}
@@ -32,9 +33,10 @@ module.exports = function (opts) {
     }
     var templatePromise = q.defer();
     var fileName = defaults.fileBaseName + fileExt;
-    fs.readFile(path.resolve(defaults.templateDir, fileName), function(err, data) {
+    var filePath = path.resolve(rootDir, defaults.templateDir, fileName);
+    fs.readFile(filePath, function(err, data) {
       if (err) {
-        // they need to provide a text/html template! or else!
+        // they need to provide a text/html template! or else! (...or do they?)
         templatePromise.reject(new Error("Error loading " + version + " template: " + err));
         return;
       }
