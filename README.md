@@ -13,7 +13,7 @@ Wiring up of [node-mailer](https://github.com/andris9/Nodemailer) to templates. 
 - `npm install --save mailpress`
 - add `mailer` config section to your `node-config`—an example for Amazon SES is below.
 - create your first mailer module
-- create corresponding templates in the templateDir you have set (or in `../views/mail` relative to your mailer module, if you're going by the default assumptions)
+- create corresponding templates in the templateDir you have set (or in `server/views/mail` if you're going by the package defaults)
 - require in your mailer and call `mailer.sendMail(templateLocals, [configs])` on it
 
 ## Config Example
