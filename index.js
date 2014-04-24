@@ -3,7 +3,6 @@ var config = require("config");
 var mustache = require("mustache");
 var _ = require('underscore');
 var q = require('q');
-
 var fs = require('fs');
 var path = require('path');
 
@@ -44,17 +43,18 @@ module.exports = function (opts) {
       if (err) {
         // they need to provide a text/html template! or else! (...or do they?)
         templatePromise.reject(new Error("Error loading " + version + " template: " + err));
-        return;
+      } else {
+        defaults.templates[version] = data.toString();
+        templatePromise.resolve();
       }
-      defaults.templates[version] = data.toString();
-      templatePromise.resolve();
     });
     return templatePromise.promise;
   }));
 
   this.sendMail = function(locals, mailOpts) {
-    templatesLoaded.then(function() {
+    return templatesLoaded.then(function() {
       var conf = _.extend({}, defaults, mailOpts);
+      var defer = q.defer();
 
       // for each of the templates defined above (html, text, or both),
       // render the template using the locals provided
@@ -68,11 +68,14 @@ module.exports = function (opts) {
       });
 
       mailOpts = _.pick(conf, nodeMailerOpts);
-      transport.sendMail(mailOpts, function(err) {
+      transport.sendMail(mailOpts, function(err, resp) {
         if (err) {
-          console.log('Mail error: ', err);
+          defer.reject(err);
+        } else {
+          defer.resolve(resp);
         }
       });
-    }).done();
+      return defer.promise;
+    });
   };
 };
