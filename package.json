@@ -4,7 +4,7 @@
   "description": "A wiring up of node-mailer to templates.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha --reporter nyan"
   },
   "repository": {
     "type": "git",
@@ -23,10 +23,15 @@
   },
   "homepage": "https://github.com/jakswa/node-mailpress",
   "dependencies": {
-    "node-mailer": "~0.1.1",
     "node-config": "0.0.2",
     "mustache": "~0.8.1",
     "underscore": "~1.6.0",
-    "q": "~1.0.1"
+    "config": "~0.4.35",
+    "nodemailer": "~0.6.3",
+    "bluebird": "~1.2.3"
+  },
+  "devDependencies": {
+    "mocha": "~1.18.2",
+    "sinon": "~1.9.1"
   }
 }
