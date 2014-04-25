@@ -23,5 +23,8 @@ describe('Mailpress', function() {
         assert(config === basename, config);
         done();
       });
+      it('should have no templates', function() {
+        assert(typeof badmailer.templates === 'undefined');
+      });
     });
 });
