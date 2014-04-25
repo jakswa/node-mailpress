@@ -54,7 +54,7 @@ module.exports = function (opts) {
   this.sendMail = function(locals, mailOpts) {
     return templatesLoaded.then(function() {
       var conf = _.extend({}, defaults, mailOpts);
-      var defer = Promise.cast();
+      var defer = Promise.defer();
 
       // for each of the templates defined above (html, text, or both),
       // render the template using the locals provided
