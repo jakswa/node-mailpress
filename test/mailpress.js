@@ -7,7 +7,7 @@ describe('Mailpress', function() {
     describe('with no base configs', function() {
       var badmailer;
       before(function(done) {
-        badmailer = new Mailpress();
+        badmailer = new Mailpress({templateExtensions: {}});
         done();
       });
       it('should not work', function(done) {

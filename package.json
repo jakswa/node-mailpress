@@ -4,7 +4,7 @@
   "description": "A wiring up of node-mailer to templates.",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter nyan"
+    "test": "npm install && ./node_modules/.bin/mocha --reporter nyan"
   },
   "repository": {
     "type": "git",
