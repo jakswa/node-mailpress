@@ -40,8 +40,14 @@ mailer: {
 var Mailpress = require('mailpress');
 
 var defaults = {
-  // to test the text-only version, for example:
-  // templateExtensions: {text: '.txt'},
+  // to manually specify which template files to use for a mailer:
+  // (this changes the mailer to use bob.html and bob.txt in the templateDir)
+  //  templateBaseName: 'bob',
+  // to override default extension expectations for templates:
+  // (to test the text-only version, for example)
+  //  templateExtensions: {text: '.txt'},
+  
+  
   subject: 'Default subject line',
   from: 'noreply@someemail.com'
 };
