@@ -1,6 +1,8 @@
 node-mailpress
 ==============
 
+[![Build Status](https://travis-ci.org/jakswa/node-mailpress.png)](https://travis-ci.org/jakswa/node-mailpress) [![NPM version](https://badge.fury.io/js/mailpress.png)](http://badge.fury.io/js/mailpress)
+
 Wiring up of [node-mailer](https://github.com/andris9/Nodemailer) to templates. Plop in the module, insert configs, and some template files, and you're ready to churn out some emails! Comes packaged with default naming expectations for quickly making mailers. For example, a `welcome.js` mailer will have template files named `mailer.html` and `mailer.txt` in the `templateDir`. You can override such expectations when creating a mailer.
 
 ## Requirements
