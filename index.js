@@ -4,6 +4,7 @@ var mustache = require("mustache");
 var _ = require('underscore');
 var Promise = require('bluebird');
 var fs = require('fs');
+var stackTrace = require('stack-trace');
 var path = require('path');
 
 var nodeMailerOpts = [
@@ -18,9 +19,9 @@ module.exports = function (opts) {
   var conf = config.mailer || {};
   var transport = nodemailer.createTransport(conf.transport, conf.transportOpts);
 
-  // assuming by default you'll name your templates the same as the mailer,
-  // just with different extensions (".html.blah.blah") (mustache only atm)
-  var parentFile = path.basename(module.parent.filename);
+  // assuming by default you'll give your templates the same base name as the mailer
+  this.parentFilePath = stackTrace.get()[1].getFileName();
+  var parentFile = path.basename(this.parentFilePath);
   var rootDir = path.dirname(require.main && require.main.filename);
   var defaults = this.defaults = {
     // can be overridden in node-config, or mailer creation options
