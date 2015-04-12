@@ -35,7 +35,7 @@ module.exports = function (opts) {
   // populate templates if not provided inline
   var templatesLoaded = Promise.all(_.map(defaults.templateExtensions, function(fileExt, version) {
     if (defaults.templates[version] || defaults[version]) {
-      return q.when(); // assume user provided their own template to render
+      return true; // assume user provided their own template to render
     }
     var fileName = defaults.templateBaseName + fileExt;
     var filePath = path.resolve(rootDir, defaults.templateDir, fileName);
