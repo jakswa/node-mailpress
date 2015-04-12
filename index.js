@@ -37,25 +37,20 @@ module.exports = function (opts) {
     if (defaults.templates[version] || defaults[version]) {
       return q.when(); // assume user provided their own template to render
     }
-    var templatePromise = Promise.defer();
     var fileName = defaults.templateBaseName + fileExt;
     var filePath = path.resolve(rootDir, defaults.templateDir, fileName);
-    fs.readFile(filePath, function(err, data) {
-      if (err) {
-        // they need to provide a text/html template! or else! (...or do they?)
-        templatePromise.reject("Error loading " + version + " template: " + err);
-      } else {
-        defaults.templates[version] = data.toString();
-        templatePromise.resolve();
-      }
+    return Promise.promisify(fs.readFile)(filePath)
+    .then(function(data){
+      defaults.templates[version] = data.toString();
+    }, function(err){
+      // they need to provide a text/html template! or else! (...or do they?)
+      templatePromise.reject("Error loading " + version + " template: " + err);
     });
-    return templatePromise.promise;
   }));
 
   this.sendMail = function(locals, mailOpts) {
     return templatesLoaded.then(function() {
       var conf = _.extend({}, defaults, mailOpts);
-      var defer = Promise.defer();
 
       // for each of the templates defined above (html, text, or both),
       // render the template using the locals provided
@@ -69,14 +64,7 @@ module.exports = function (opts) {
       });
 
       mailOpts = _.pick(conf, nodeMailerOpts);
-      transport.sendMail(mailOpts, function(err, resp) {
-        if (err) {
-          defer.reject(err);
-        } else {
-          defer.resolve(resp);
-        }
-      });
-      return defer.promise;
+      return Promise.promisify(transport.sendMail)(mailOpts);
     });
   };
 };
