@@ -13,11 +13,10 @@ var nodeMailerOpts = [
   'alternatives', 'envelope', 'messageId', 'date', 'encoding', 'charset'
 ];
 
-module.exports = function (opts) {
+function Mailpress(opts) {
   "use strict";
 
   var conf = config.mailer || {};
-  var transport = nodemailer.createTransport(conf.transport, conf.transportOpts);
 
   // assuming by default you'll give your templates the same base name as the mailer
   this.parentFilePath = stackTrace.get()[1].getFileName();
@@ -33,7 +32,7 @@ module.exports = function (opts) {
   _.extend(defaults, conf, opts); // user can override all the above
 
   // populate templates if not provided inline
-  var templatesLoaded = Promise.all(_.map(defaults.templateExtensions, function(fileExt, version) {
+  this._templatesLoaded = Promise.all(_.map(defaults.templateExtensions, function(fileExt, version) {
     if (defaults.templates[version] || defaults[version]) {
       return true; // assume user provided their own template to render
     }
@@ -47,24 +46,28 @@ module.exports = function (opts) {
       templatePromise.reject("Error loading " + version + " template: " + err);
     });
   }));
+}
 
-  this.sendMail = function(locals, mailOpts) {
-    return templatesLoaded.then(function() {
-      var conf = _.extend({}, defaults, mailOpts);
+Mailpress.prototype.sendMail = function(locals, mailOpts) {
+  return this._templatesLoaded.then(function() {
+    var defaults = this.defaults;
+    var conf = _.extend({}, defaults, mailOpts);
+    var transport = nodemailer.createTransport(conf.transport, conf.transportOpts);
 
-      // for each of the templates defined above (html, text, or both),
-      // render the template using the locals provided
-      _.each(defaults.templateExtensions, function(fileExt, version) {
-        if (defaults.templates[version] && !conf[version]) {
-          conf[version] = mustache.render(defaults.templates[version], locals);
-        } else if (!conf[version]) {
-          // throw error because they have a templateExtension but no data for it
-          throw new Error("Attempted to send email without {" + version + "} content.");
-        }
-      });
-
-      mailOpts = _.pick(conf, nodeMailerOpts);
-      return Promise.promisify(transport.sendMail)(mailOpts);
+    // for each of the templates defined above (html, text, or both),
+    // render the template using the locals provided
+    _.each(defaults.templateExtensions, function(fileExt, version) {
+      if (defaults.templates[version] && !conf[version]) {
+        conf[version] = mustache.render(defaults.templates[version], locals);
+      } else if (!conf[version]) {
+        // throw error because they have a templateExtension but no data for it
+        throw new Error("Attempted to send email without {" + version + "} content.");
+      }
     });
-  };
+
+    mailOpts = _.pick(conf, nodeMailerOpts);
+    return Promise.promisify(transport.sendMail)(mailOpts);
+  });
 };
+
+module.exports = Mailpress;
